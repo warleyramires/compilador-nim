@@ -1,0 +1,25 @@
+options {
+    STATIC = false;
+}
+
+PARSER_BEGIN(CompilLab1)
+
+public class CompilLab1 {
+
+    public static void main(String[] args) throws Exception {
+        CompilLab1 scanner = new CompilLab1(System.in);
+        Token t;
+
+        do {
+            t = scanner.getNextToken();
+            System.out.println(t.image);
+        } while (t.kind != EOF);
+    }
+}
+
+PARSER_END(CompilLab1)
+
+SKIP :
+{ " " | "\n" | "\t" | "\r" }
+
+TOKEN : { < ID: ["a"-"z"] (["a"-"z"] | ["0"-"9"])* > }
