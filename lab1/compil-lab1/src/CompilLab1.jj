@@ -7,19 +7,178 @@ PARSER_BEGIN(CompilLab1)
 public class CompilLab1 {
 
     public static void main(String[] args) throws Exception {
+
         CompilLab1 scanner = new CompilLab1(System.in);
+
+        java.util.Map constants = new java.util.HashMap();
+
+        Class clazz = CompilLab1Constants.class;
+        java.lang.reflect.Field[] fields = clazz.getFields();
+
+        for (int i = 0; i < fields.length; i++) {
+            java.lang.reflect.Field field = fields[i];
+
+            if (field.getType() == int.class) {
+
+                int modifiers = field.getModifiers();
+
+                boolean isConstant =
+                        java.lang.reflect.Modifier.isPublic(modifiers) &&
+                        java.lang.reflect.Modifier.isStatic(modifiers) &&
+                        java.lang.reflect.Modifier.isFinal(modifiers);
+
+                if (isConstant) {
+                    constants.put(
+                            Integer.valueOf(field.getInt(null)),
+                            field.getName()
+                    );
+                }
+            }
+        }
+
         Token t;
 
         do {
             t = scanner.getNextToken();
-            System.out.println(t.image);
-        } while (t.kind != EOF);
+
+            if (t.kind != CompilLab1Constants.EOF) {
+                System.out.println(
+                        (String) constants.get(Integer.valueOf(t.kind))
+                );
+            }
+
+        } while (t.kind != CompilLab1Constants.EOF);
     }
 }
 
 PARSER_END(CompilLab1)
 
+TOKEN_MGR_DECLS : {
+    int commentLevel = 0;
+}
+
+/* ========================= */
+/* IGNORAR ESPAÇOS */
+/* ========================= */
+
 SKIP :
 { " " | "\n" | "\t" | "\r" }
 
-TOKEN : { < ID: ["a"-"z"] (["a"-"z"] | ["0"-"9"])* > }
+/* ========================= */
+/* COMMENTS */
+/* ========================= */
+
+/* Detecta início de comentário multilinha */
+<DEFAULT> SKIP : {
+    "#[" {
+        commentLevel = 1;
+    } : IN_MULTILINE_COMMENT
+}
+
+/* Estado interno do comentário multilinha */
+<IN_MULTILINE_COMMENT> SKIP : {
+    "#[" {
+        commentLevel++;
+    }
+|
+    "]#" {
+        commentLevel--;
+        if (commentLevel == 0) {
+            SwitchTo(DEFAULT);
+        }
+    }
+|
+    < ~[] >
+}
+
+/* Comentário de linha */
+<DEFAULT> SKIP : {
+    < "#" (~["\n","\r"])* >
+}
+
+/* ========================= */
+/* KEYWORDS - CONTROLE */
+/* ========================= */
+
+TOKEN: {
+    <KW_IF: "if">
+|   <KW_ELSE: "else">
+|   <KW_ELIF: "elif">
+|   <KW_FOR: "for">
+|   <KW_WHILE: "while">
+|   <KW_CASE: "case">
+|   <KW_TRY: "try">
+|   <KW_EXCEPT: "except">
+|   <KW_FINALLY: "finally">
+}
+
+/* ========================= */
+/* KEYWORDS - DECLARAÇÃO */
+/* ========================= */
+
+TOKEN: {
+    <KW_VAR: "var">
+|   <KW_LET: "let">
+|   <KW_CONST: "const">
+|   <KW_TYPE: "type">
+|   <KW_OBJECT: "object">
+|   <KW_TUPLE: "tuple">
+|   <KW_ENUM: "enum">
+}
+
+/* ========================= */
+/* KEYWORDS - FUNÇÕES */
+/* ========================= */
+
+TOKEN: {
+    <KW_PROC: "proc">
+|   <KW_FUNC: "func">
+|   <KW_METHOD: "method">
+|   <KW_ITERATOR: "iterator">
+|   <KW_TEMPLATE: "template">
+|   <KW_MACRO: "macro">
+}
+
+/* ========================= */
+/* OPERADORES */
+/* ========================= */
+
+TOKEN : {
+    <OP_PLUS: "+" >
+|   <OP_MINUS: "-" >
+|   <OP_MULTIPLICATION: "*" >
+|   <OP_DIVISION: "/" >
+|   <OP_MODULUS: "mod" >
+|   <OP_LOGICAL_AND: "and" >
+|   <OP_LOGICAL_OR: "or" >
+|   <OP_LOGICAL_NOT: "not" >
+|   <OP_EQUAL: "==" >
+|   <OP_NOT_EQUAL: "!=" >
+|   <OP_LESS_EQUAL: "<=" >
+|   <OP_GREATER_EQUAL: ">=" >
+|   <OP_LESS_THAN: "<" >
+|   <OP_GREATER_THAN: ">" >
+|   <OP_ASSIGN: "=" >
+}
+
+/* ========================= */
+/* DELIMITADORES */
+/* ========================= */
+
+TOKEN : {
+    <LEFT_PARENTHESIS: "(" >
+|   <RIGHT_PARENTHESIS: ")" >
+|   <LEFT_BRACKET: "[" >
+|   <RIGHT_BRACKET: "]" >
+|   <COLON: ":" >
+|   <COMMA: "," >
+|   <DOT: "." >
+}
+
+/* ========================= */
+/* IDENTIFICADOR */
+/* ========================= */
+
+TOKEN : {
+    <ID: ["a"-"z"] (["a"-"z"] | ["0"-"9"])* >
+}
