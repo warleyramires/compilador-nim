@@ -43,7 +43,7 @@ public class CompilLab1 {
 
             if (t.kind != CompilLab1Constants.EOF) {
                 System.out.println(
-                        (String) constants.get(Integer.valueOf(t.kind))
+                        constants.get(Integer.valueOf(t.kind)) + " " + t.image
                 );
             }
 
@@ -91,9 +91,10 @@ SKIP :
     < ~[] >
 }
 
-/* Comentário de linha */
+/* Comentário de linha — não pode começar com "#[" (reservado para multilinha) */
 <DEFAULT> SKIP : {
-    < "#" (~["\n","\r"])* >
+    < "#" (~["[","\n","\r"]) (~["\n","\r"])* >
+|   < "#" >
 }
 
 /* ========================= */
@@ -110,6 +111,26 @@ TOKEN: {
 |   <KW_TRY: "try">
 |   <KW_EXCEPT: "except">
 |   <KW_FINALLY: "finally">
+|   <KW_RETURN: "return">
+|   <KW_BREAK: "break">
+|   <KW_CONTINUE: "continue">
+|   <KW_IMPORT: "import">
+|   <KW_FROM: "from">
+|   <KW_INCLUDE: "include">
+|   <KW_DISCARD: "discard">
+|   <KW_RAISE: "raise">
+|   <KW_YIELD: "yield">
+|   <KW_WHEN: "when">
+|   <KW_OF: "of">
+|   <KW_DO: "do">
+|   <KW_AS: "as">
+|   <KW_IN: "in">
+|   <KW_NOTIN: "notin">
+|   <KW_IS: "is">
+|   <KW_ISNOT: "isnot">
+|   <KW_NIL: "nil">
+|   <KW_DEFER: "defer">
+|   <KW_USING: "using">
 }
 
 /* ========================= */
@@ -140,18 +161,37 @@ TOKEN: {
 }
 
 /* ========================= */
+/* TIPOS */
+/* ========================= */
+TOKEN : {
+    < TYPE_INT: "int" >
+|   < TYPE_FLOAT: "float" >
+|   < TYPE_STRING: "string" >
+|   < TYPE_BOOL: "bool" >
+}
+
+/* ========================= */
 /* OPERADORES */
 /* ========================= */
 
 TOKEN : {
-    <OP_PLUS: "+" >
+    <OP_PLUS_ASSIGN: "+=" >
+|   <OP_MINUS_ASSIGN: "-=" >
+|   <OP_MULTIPLICATION_ASSIGN: "*=" >
+|   <OP_DIVISION_ASSIGN: "/=" >
+|   <OP_PLUS: "+" >
 |   <OP_MINUS: "-" >
 |   <OP_MULTIPLICATION: "*" >
 |   <OP_DIVISION: "/" >
 |   <OP_MODULUS: "mod" >
+|   <OP_INT_DIVISION: "div" >
 |   <OP_LOGICAL_AND: "and" >
 |   <OP_LOGICAL_OR: "or" >
 |   <OP_LOGICAL_NOT: "not" >
+|   <OP_XOR: "xor" >
+|   <OP_SHIFT_LEFT: "shl" >
+|   <OP_SHIFT_RIGHT: "shr" >
+|   <OP_STRING_CONCATENATION: "&" >
 |   <OP_EQUAL: "==" >
 |   <OP_NOT_EQUAL: "!=" >
 |   <OP_LESS_EQUAL: "<=" >
@@ -159,6 +199,11 @@ TOKEN : {
 |   <OP_LESS_THAN: "<" >
 |   <OP_GREATER_THAN: ">" >
 |   <OP_ASSIGN: "=" >
+|   <OP_RANGE_EXCLUSIVE: "..<" >
+|   <OP_RANGE: ".." >
+|   <OP_AT_SIGN: "@" >
+|   <OP_DEREFERENCE: "^" >
+|   <OP_TO_STRING: "$" >
 }
 
 /* ========================= */
@@ -166,13 +211,60 @@ TOKEN : {
 /* ========================= */
 
 TOKEN : {
-    <LEFT_PARENTHESIS: "(" >
+    /* Compostos devem vir antes dos simples — longest match */
+    <PRAGMA_OPEN: "{." >
+|   <PRAGMA_CLOSE: ".}" >
+|   <BRACKET_DOT_OPEN: "[." >
+|   <DOT_BRACKET_CLOSE: ".]" >
+|   <PAREN_DOT_OPEN: "(." >
+|   <DOT_PAREN_CLOSE: ".)" >
+|   <GENERIC_OPEN: "[:" >
+|   <DOUBLE_COLON: "::" >
+    /* Simples */
+|   <LEFT_PARENTHESIS: "(" >
 |   <RIGHT_PARENTHESIS: ")" >
+|   <LEFT_CURLY_BRACE: "{" >
+|   <RIGHT_CURLY_BRACE: "}" >
 |   <LEFT_BRACKET: "[" >
 |   <RIGHT_BRACKET: "]" >
 |   <COLON: ":" >
+|   <SEMICOLON: ";" >
 |   <COMMA: "," >
 |   <DOT: "." >
+}
+
+/* ========================= */
+/* LITERAIS NUMÉRICOS */
+/* ========================= */
+
+/* NUM_FLOAT deve vir ANTES de NUM_INT para evitar ambiguidade */
+/* Ex: "1.0" sem esta ordem seria tokenizado como NUM_INT("1") + DOT + NUM_INT("0") */
+TOKEN : {
+    <NUM_FLOAT:
+        (["0"-"9"])+ ("_" (["0"-"9"])+)*
+        (
+            ( "." (["0"-"9"])+ ("_" (["0"-"9"])+)*
+              ( ["e","E"] (["+","-"])? (["0"-"9"])+ ("_" (["0"-"9"])+)* )?
+            )
+          | ( ["e","E"] (["+","-"])? (["0"-"9"])+ ("_" (["0"-"9"])+)* )
+        )
+    >
+}
+
+TOKEN : {
+    <NUM_INTEGER_HEXADECIMAL: "0" ["x","X"] ["0"-"9","a"-"f","A"-"F"] (["_","0"-"9","a"-"f","A"-"F"])* >
+|   <NUM_INTEGER_OCTAL: "0" "o" ["0"-"7"] (["_","0"-"7"])* >
+|   <NUM_INTEGER_BINARY: "0" ["b","B"] ["0","1"] (["_","0","1"])* >
+|   <NUM_INTEGER: (["0"-"9"])+ >
+}
+
+/* ========================= */
+/* LITERAIS DE STRING E CHAR */
+/* ========================= */
+
+TOKEN : {
+    <STRING_LITERAL: "\"" ( ~["\"","\\","\n","\r"] | "\\" ~[] )* "\"" >
+|   <CHAR_LITERAL: "'" ( ~["'","\\"] | "\\" ~[] ) "'" >
 }
 
 /* ========================= */
@@ -180,5 +272,6 @@ TOKEN : {
 /* ========================= */
 
 TOKEN : {
-    <ID: ["a"-"z"] (["a"-"z"] | ["0"-"9"])* >
+    <BACKTICK_ID: "`" (~["`"])+ "`" >
+|   <ID: ["a"-"z","A"-"Z","_"] (["a"-"z","A"-"Z","0"-"9","_"])* >
 }
