@@ -157,35 +157,61 @@ public interface CompilLab1Constants {
   /** RegularExpression Id. */
   int OP_DEREFERENCE = 84;
   /** RegularExpression Id. */
-  int LEFT_PARENTHESIS = 85;
+  int OP_TO_STRING = 85;
   /** RegularExpression Id. */
-  int RIGHT_PARENTHESIS = 86;
+  int PRAGMA_OPEN = 86;
   /** RegularExpression Id. */
-  int LEFT_BRACKET = 87;
+  int PRAGMA_CLOSE = 87;
   /** RegularExpression Id. */
-  int RIGHT_BRACKET = 88;
+  int BRACKET_DOT_OPEN = 88;
   /** RegularExpression Id. */
-  int COLON = 89;
+  int DOT_BRACKET_CLOSE = 89;
   /** RegularExpression Id. */
-  int COMMA = 90;
+  int PAREN_DOT_OPEN = 90;
   /** RegularExpression Id. */
-  int DOT = 91;
+  int DOT_PAREN_CLOSE = 91;
   /** RegularExpression Id. */
-  int NUM_FLOAT = 92;
+  int GENERIC_OPEN = 92;
   /** RegularExpression Id. */
-  int NUM_INTEGER_HEXADECIMAL = 93;
+  int DOUBLE_COLON = 93;
   /** RegularExpression Id. */
-  int NUM_INTEGER_OCTAL = 94;
+  int LEFT_PARENTHESIS = 94;
   /** RegularExpression Id. */
-  int NUM_INTEGER_BINARY = 95;
+  int RIGHT_PARENTHESIS = 95;
   /** RegularExpression Id. */
-  int NUM_INTEGER = 96;
+  int LEFT_CURLY_BRACE = 96;
   /** RegularExpression Id. */
-  int STRING_LITERAL = 97;
+  int RIGHT_CURLY_BRACE = 97;
   /** RegularExpression Id. */
-  int CHAR_LITERAL = 98;
+  int LEFT_BRACKET = 98;
   /** RegularExpression Id. */
-  int ID = 99;
+  int RIGHT_BRACKET = 99;
+  /** RegularExpression Id. */
+  int COLON = 100;
+  /** RegularExpression Id. */
+  int SEMICOLON = 101;
+  /** RegularExpression Id. */
+  int COMMA = 102;
+  /** RegularExpression Id. */
+  int DOT = 103;
+  /** RegularExpression Id. */
+  int NUM_FLOAT = 104;
+  /** RegularExpression Id. */
+  int NUM_INTEGER_HEXADECIMAL = 105;
+  /** RegularExpression Id. */
+  int NUM_INTEGER_OCTAL = 106;
+  /** RegularExpression Id. */
+  int NUM_INTEGER_BINARY = 107;
+  /** RegularExpression Id. */
+  int NUM_INTEGER = 108;
+  /** RegularExpression Id. */
+  int STRING_LITERAL = 109;
+  /** RegularExpression Id. */
+  int CHAR_LITERAL = 110;
+  /** RegularExpression Id. */
+  int BACKTICK_ID = 111;
+  /** RegularExpression Id. */
+  int ID = 112;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -279,11 +305,23 @@ public interface CompilLab1Constants {
     "\"..\"",
     "\"@\"",
     "\"^\"",
+    "\"$\"",
+    "\"{.\"",
+    "\".}\"",
+    "\"[.\"",
+    "\".]\"",
+    "\"(.\"",
+    "\".)\"",
+    "\"[:\"",
+    "\"::\"",
     "\"(\"",
     "\")\"",
+    "\"{\"",
+    "\"}\"",
     "\"[\"",
     "\"]\"",
     "\":\"",
+    "\";\"",
     "\",\"",
     "\".\"",
     "<NUM_FLOAT>",
@@ -293,6 +331,7 @@ public interface CompilLab1Constants {
     "<NUM_INTEGER>",
     "<STRING_LITERAL>",
     "<CHAR_LITERAL>",
+    "<BACKTICK_ID>",
     "<ID>",
   };
 
