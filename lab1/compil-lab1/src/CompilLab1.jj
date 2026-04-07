@@ -10,44 +10,59 @@ public class CompilLab1 {
 
         CompilLab1 scanner = new CompilLab1(System.in);
 
-        java.util.Map constants = new java.util.HashMap();
+        java.util.Map<Integer,String> constants = new java.util.HashMap<Integer,String>();
 
         Class clazz = CompilLab1Constants.class;
         java.lang.reflect.Field[] fields = clazz.getFields();
 
-        for (int i = 0; i < fields.length; i++) {
-            java.lang.reflect.Field field = fields[i];
-
+        for (java.lang.reflect.Field field : fields) {
             if (field.getType() == int.class) {
-
-                int modifiers = field.getModifiers();
-
-                boolean isConstant =
-                        java.lang.reflect.Modifier.isPublic(modifiers) &&
-                        java.lang.reflect.Modifier.isStatic(modifiers) &&
-                        java.lang.reflect.Modifier.isFinal(modifiers);
-
-                if (isConstant) {
-                    constants.put(
-                            Integer.valueOf(field.getInt(null)),
-                            field.getName()
-                    );
+                int mod = field.getModifiers();
+                if (java.lang.reflect.Modifier.isPublic(mod) &&
+                    java.lang.reflect.Modifier.isStatic(mod) &&
+                    java.lang.reflect.Modifier.isFinal(mod)) {
+                    constants.put(field.getInt(null), field.getName());
                 }
             }
         }
 
-        Token t;
+        java.util.Deque<Integer> indentStack = new java.util.ArrayDeque<Integer>();
+        indentStack.push(1); // coluna base — JavaCC usa colunas 1-based
+        int prevLine = -1;
 
+        Token t;
         do {
             t = scanner.getNextToken();
+            if (t.kind == CompilLab1Constants.EOF) break;
 
-            if (t.kind != CompilLab1Constants.EOF) {
-                System.out.println(
-                        constants.get(Integer.valueOf(t.kind)) + " " + t.image
-                );
+            if (t.beginLine > prevLine) {
+                if (prevLine != -1) {
+                    System.out.println("NEWLINE \\n");
+                }
+                int col = t.beginColumn;
+                int top = indentStack.peek();
+                if (col > top) {
+                    System.out.println("INDENT  ");
+                    indentStack.push(col);
+                } else {
+                    while (col < indentStack.peek()) {
+                        System.out.println("DEDENT  ");
+                        indentStack.pop();
+                    }
+                }
+                prevLine = t.beginLine;
             }
 
-        } while (t.kind != CompilLab1Constants.EOF);
+            System.out.println(constants.get(t.kind) + " " + t.image);
+
+        } while (true);
+
+        // Fechar ultimo statement e blocos ainda abertos
+        System.out.println("NEWLINE \\n");
+        while (indentStack.size() > 1) {
+            System.out.println("DEDENT  ");
+            indentStack.pop();
+        }
     }
 }
 
@@ -131,6 +146,16 @@ TOKEN: {
 |   <KW_NIL: "nil">
 |   <KW_DEFER: "defer">
 |   <KW_USING: "using">
+}
+
+/* ========================= */
+/* LITERAIS BOOLEANOS E ARRAY */
+/* ========================= */
+
+TOKEN: {
+    <KW_TRUE: "true">
+|   <KW_FALSE: "false">
+|   <KW_ARRAY: "array">
 }
 
 /* ========================= */
