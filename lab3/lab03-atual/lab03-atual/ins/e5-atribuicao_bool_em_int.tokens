@@ -1,0 +1,28 @@
+KW_PROC proc
+ID erroAtribuicaoBool
+LEFT_PARENTHESIS (
+ID a
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_INT int
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID x
+COLON :
+TYPE_INT int
+NEWLINE \n
+ID x
+OP_ASSIGN =
+KW_TRUE true
+NEWLINE \n
+KW_RETURN return
+ID x
+OP_PLUS +
+ID a
+NEWLINE \n
+DEDENT  
+$ $

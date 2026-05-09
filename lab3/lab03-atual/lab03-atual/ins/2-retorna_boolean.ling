@@ -1,0 +1,4 @@
+proc testa(ativo: bool, x: int): bool =
+  var ok: bool
+  ok = not false == (x < 10)
+  return ok

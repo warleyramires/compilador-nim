@@ -1,0 +1,32 @@
+KW_PROC proc
+ID modulo
+LEFT_PARENTHESIS (
+ID a
+COLON :
+TYPE_INT int
+COMMA ,
+ID b
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_INT int
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID resto
+COLON :
+TYPE_INT int
+NEWLINE \n
+ID resto
+OP_ASSIGN =
+ID a
+OP_MODULUS mod
+ID b
+NEWLINE \n
+KW_RETURN return
+ID resto
+NEWLINE \n
+DEDENT  
+$ $

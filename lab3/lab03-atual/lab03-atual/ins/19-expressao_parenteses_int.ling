@@ -1,0 +1,4 @@
+proc calcular(a: int, b: int, c: int): int =
+  var resultado: int
+  resultado = (a + b) * (b - c)
+  return resultado

@@ -1,0 +1,32 @@
+KW_PROC proc
+ID erroRetornoFloatEmBool
+LEFT_PARENTHESIS (
+ID taxa
+COLON :
+TYPE_FLOAT float
+COMMA ,
+ID valor
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_BOOL bool
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID desconto
+COLON :
+TYPE_FLOAT float
+NEWLINE \n
+ID desconto
+OP_ASSIGN =
+ID valor
+OP_MULTIPLICATION *
+ID taxa
+NEWLINE \n
+KW_RETURN return
+ID desconto
+NEWLINE \n
+DEDENT  
+$ $

@@ -1,0 +1,4 @@
+proc iguaisFloat(a: float, b: float): bool =
+  var resultado: bool
+  resultado = a == b
+  return resultado

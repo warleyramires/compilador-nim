@@ -1,0 +1,4 @@
+proc produto(x: int, y: int): int =
+  var resultado: int
+  resultado = x * y
+  return resultado

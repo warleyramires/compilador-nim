@@ -1,0 +1,3 @@
+proc teste(ativo: bool, x: int): bool =
+  var limite: bool = x < 10
+  return ativo and not limite

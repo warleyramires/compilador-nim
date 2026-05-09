@@ -1,0 +1,3 @@
+proc erroAtribuicao(): int =
+  var x: int = true
+  return x

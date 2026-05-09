@@ -1,0 +1,13 @@
+proc triplo_aninhado(): int =
+  var a: int
+  a = 1
+  if true:
+    var b: int
+    b = a + 2
+    if true:
+      var c: int
+      c = b * 3
+      if true:
+        var d: int
+        d = c - 1
+        return d

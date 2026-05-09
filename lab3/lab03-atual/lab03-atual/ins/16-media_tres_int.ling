@@ -1,0 +1,6 @@
+proc media3(a: int, b: int, c: int): int =
+  var soma: int
+  var resultado: int
+  soma = a + b + c
+  resultado = soma div 3
+  return resultado

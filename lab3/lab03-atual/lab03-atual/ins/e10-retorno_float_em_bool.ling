@@ -1,0 +1,4 @@
+proc erroRetornoFloatEmBool(taxa: float, valor: int): bool =
+  var desconto: float
+  desconto = valor * taxa
+  return desconto

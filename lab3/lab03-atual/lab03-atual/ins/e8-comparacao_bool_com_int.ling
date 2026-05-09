@@ -1,0 +1,4 @@
+proc erroMenorBool(ativo: bool, limite: int): bool =
+  var resultado: bool
+  resultado = ativo < limite
+  return resultado

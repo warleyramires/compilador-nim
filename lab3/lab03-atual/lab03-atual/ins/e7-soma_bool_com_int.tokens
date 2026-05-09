@@ -1,0 +1,32 @@
+KW_PROC proc
+ID erroSomaBool
+LEFT_PARENTHESIS (
+ID b
+COLON :
+TYPE_BOOL bool
+COMMA ,
+ID x
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_INT int
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID resultado
+COLON :
+TYPE_INT int
+NEWLINE \n
+ID resultado
+OP_ASSIGN =
+ID b
+OP_PLUS +
+ID x
+NEWLINE \n
+KW_RETURN return
+ID resultado
+NEWLINE \n
+DEDENT  
+$ $

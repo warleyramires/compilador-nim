@@ -1,0 +1,4 @@
+proc modulo(a: int, b: int): int =
+  var resto: int
+  resto = a mod b
+  return resto

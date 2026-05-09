@@ -1,0 +1,27 @@
+KW_PROC proc
+ID inverte
+LEFT_PARENTHESIS (
+ID b
+COLON :
+TYPE_BOOL bool
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_BOOL bool
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID resultado
+COLON :
+TYPE_BOOL bool
+NEWLINE \n
+ID resultado
+OP_ASSIGN =
+OP_LOGICAL_NOT not
+ID b
+NEWLINE \n
+KW_RETURN return
+ID resultado
+NEWLINE \n
+DEDENT  
+$ $

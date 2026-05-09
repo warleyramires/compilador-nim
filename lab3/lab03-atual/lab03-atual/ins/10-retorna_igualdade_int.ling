@@ -1,0 +1,4 @@
+proc ehZero(x: int): bool =
+  var resultado: bool
+  resultado = x == 0
+  return resultado

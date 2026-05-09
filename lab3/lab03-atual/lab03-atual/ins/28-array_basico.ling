@@ -1,0 +1,6 @@
+proc usaArray(a: int, b: int): int =
+  var valores: array[3, int]
+  valores[0] = a
+  valores[1] = b
+  valores[2] = valores[0] + valores[1]
+  return valores[2]

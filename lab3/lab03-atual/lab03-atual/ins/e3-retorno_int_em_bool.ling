@@ -1,0 +1,4 @@
+proc erroRetornoInt(a: int, b: int): bool =
+  var soma: int
+  soma = a + b
+  return soma

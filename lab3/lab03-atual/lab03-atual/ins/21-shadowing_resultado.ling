@@ -1,0 +1,7 @@
+proc sombra(x: int): int =
+  var resultado: int
+  resultado = x * 100
+  if true:
+    var resultado: int
+    resultado = x * 1
+    return resultado

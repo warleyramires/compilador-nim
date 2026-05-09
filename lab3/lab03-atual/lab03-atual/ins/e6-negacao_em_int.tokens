@@ -1,0 +1,27 @@
+KW_PROC proc
+ID erroNegacaoInt
+LEFT_PARENTHESIS (
+ID x
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_BOOL bool
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID resultado
+COLON :
+TYPE_BOOL bool
+NEWLINE \n
+ID resultado
+OP_ASSIGN =
+OP_LOGICAL_NOT not
+ID x
+NEWLINE \n
+KW_RETURN return
+ID resultado
+NEWLINE \n
+DEDENT  
+$ $

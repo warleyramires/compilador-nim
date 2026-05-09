@@ -1,0 +1,4 @@
+proc avalia(a: int, b: int, ativo: bool): bool =
+  var crescente: bool = a <= b
+  var diferente: bool = a != b
+  return ativo and crescente and diferente

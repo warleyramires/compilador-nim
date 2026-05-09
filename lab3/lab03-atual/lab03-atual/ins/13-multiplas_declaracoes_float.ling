@@ -1,0 +1,8 @@
+proc hipotenusa(a: float, b: float): float =
+  var a2: float
+  var b2: float
+  var soma: float
+  a2 = a * a
+  b2 = b * b
+  soma = a2 + b2
+  return soma

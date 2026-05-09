@@ -1,0 +1,7 @@
+proc principal(x: int): int =
+  var y: int
+  y = dobro(x + 1)
+  return y
+
+proc dobro(n: int): int =
+  return n * 2

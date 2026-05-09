@@ -1,0 +1,4 @@
+proc soma(a: int, b: int): int =
+  var resultado: int
+  resultado = a + b * 2
+  return resultado

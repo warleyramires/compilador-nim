@@ -1,0 +1,4 @@
+proc erroRetornoBool(x: int): int =
+  var flag: bool
+  flag = x < 0
+  return flag

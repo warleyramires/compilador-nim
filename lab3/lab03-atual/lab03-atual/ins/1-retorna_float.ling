@@ -1,0 +1,4 @@
+proc media(a: float, b: float): float =
+  var m: float
+  m = (a + b) / 2.0
+  return m

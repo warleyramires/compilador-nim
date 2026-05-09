@@ -1,0 +1,4 @@
+proc erroAtribuicaoBool(a: int): int =
+  var x: int
+  x = true
+  return x + a

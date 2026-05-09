@@ -1,0 +1,68 @@
+S' -> Program
+Program -> DeclList
+DeclList -> DeclList FuncDecl
+DeclList -> FuncDecl
+FuncDecl -> KW_PROC ID LEFT_PARENTHESIS ParamList RIGHT_PARENTHESIS COLON Type OP_ASSIGN Block
+FuncDecl -> KW_PROC ID LEFT_PARENTHESIS RIGHT_PARENTHESIS COLON Type OP_ASSIGN Block
+Block -> NEWLINE INDENT StmtList DEDENT
+StmtList -> StmtList Stmt
+StmtList -> Stmt
+Stmt -> VarDecl
+Stmt -> AssignStmt NEWLINE
+Stmt -> ArrAssignStmt NEWLINE
+Stmt -> IfStmt
+Stmt -> WhileStmt
+Stmt -> ReturnStmt NEWLINE
+VarDecl -> KW_VAR ID COLON Type NEWLINE
+VarDecl -> KW_VAR ID COLON Type OP_ASSIGN Expr NEWLINE
+VarDecl -> KW_VAR ID COLON KW_ARRAY LEFT_BRACKET NUM_INTEGER COMMA Type RIGHT_BRACKET NEWLINE
+AssignStmt -> ID OP_ASSIGN Expr
+ArrAssignStmt -> ID LEFT_BRACKET Expr RIGHT_BRACKET OP_ASSIGN Expr
+IfStmt -> KW_IF Expr COLON Block
+IfStmt -> KW_IF Expr COLON Block KW_ELSE COLON Block
+IfStmt -> KW_IF Expr COLON Block ElifChain
+IfStmt -> KW_IF Expr COLON Block ElifChain KW_ELSE COLON Block
+ElifChain -> ElifChain KW_ELIF Expr COLON Block
+ElifChain -> KW_ELIF Expr COLON Block
+WhileStmt -> KW_WHILE Expr COLON Block
+ReturnStmt -> KW_RETURN Expr
+Expr -> Expr OP_LOGICAL_OR AndExpr
+Expr -> AndExpr
+AndExpr -> AndExpr OP_LOGICAL_AND CmpExpr
+AndExpr -> CmpExpr
+CmpExpr -> CmpExpr OP_EQUAL AddExpr
+CmpExpr -> CmpExpr OP_NOT_EQUAL AddExpr
+CmpExpr -> CmpExpr OP_LESS_THAN AddExpr
+CmpExpr -> CmpExpr OP_LESS_EQUAL AddExpr
+CmpExpr -> CmpExpr OP_GREATER_THAN AddExpr
+CmpExpr -> CmpExpr OP_GREATER_EQUAL AddExpr
+CmpExpr -> AddExpr
+AddExpr -> AddExpr OP_PLUS MulExpr
+AddExpr -> AddExpr OP_MINUS MulExpr
+AddExpr -> MulExpr
+MulExpr -> MulExpr OP_MULTIPLICATION UnaryExpr
+MulExpr -> MulExpr OP_DIVISION UnaryExpr
+MulExpr -> MulExpr OP_INT_DIVISION UnaryExpr
+MulExpr -> MulExpr OP_MODULUS UnaryExpr
+MulExpr -> UnaryExpr
+UnaryExpr -> OP_LOGICAL_NOT UnaryExpr
+UnaryExpr -> OP_MINUS UnaryExpr
+UnaryExpr -> PostfixExpr
+PostfixExpr -> PostfixExpr LEFT_BRACKET Expr RIGHT_BRACKET
+PostfixExpr -> Primary
+Primary -> ID
+Primary -> ID LEFT_PARENTHESIS RIGHT_PARENTHESIS
+Primary -> ID LEFT_PARENTHESIS ArgList RIGHT_PARENTHESIS
+Primary -> NUM_INTEGER
+Primary -> NUM_FLOAT
+Primary -> KW_TRUE
+Primary -> KW_FALSE
+Primary -> LEFT_PARENTHESIS Expr RIGHT_PARENTHESIS
+ArgList -> ArgList COMMA Expr
+ArgList -> Expr
+ParamList -> ParamList COMMA Param
+ParamList -> Param
+Param -> ID COLON Type
+Type -> TYPE_INT
+Type -> TYPE_FLOAT
+Type -> TYPE_BOOL

@@ -1,0 +1,4 @@
+proc descontar(preco: float, taxa: float): float =
+  var final: float
+  final = preco * (1.0 - taxa)
+  return final

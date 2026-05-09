@@ -1,0 +1,7 @@
+proc principal(): int =
+  var x: int
+  x = 1
+  if true:
+    var y: int
+    y = x + 2
+    return y

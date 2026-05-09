@@ -1,0 +1,8 @@
+proc sombraTresNiveis(x: int): int =
+  var v: int
+  v = x * 2
+  if true:
+    var v: int = v * 3
+    if true:
+      var v: int = v + 1
+      return v

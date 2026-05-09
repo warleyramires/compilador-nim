@@ -1,0 +1,32 @@
+KW_PROC proc
+ID produto
+LEFT_PARENTHESIS (
+ID x
+COLON :
+TYPE_INT int
+COMMA ,
+ID y
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_INT int
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID resultado
+COLON :
+TYPE_INT int
+NEWLINE \n
+ID resultado
+OP_ASSIGN =
+ID x
+OP_MULTIPLICATION *
+ID y
+NEWLINE \n
+KW_RETURN return
+ID resultado
+NEWLINE \n
+DEDENT  
+$ $

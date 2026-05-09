@@ -1,0 +1,4 @@
+proc erroIndice(): int =
+  var valores: array[3, int]
+  valores[1.5] = 2
+  return valores[0]

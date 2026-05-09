@@ -1,0 +1,4 @@
+proc erroSomaBool(b: bool, x: int): int =
+  var resultado: int
+  resultado = b + x
+  return resultado

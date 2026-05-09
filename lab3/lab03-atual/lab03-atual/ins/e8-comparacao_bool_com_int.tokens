@@ -1,0 +1,32 @@
+KW_PROC proc
+ID erroMenorBool
+LEFT_PARENTHESIS (
+ID ativo
+COLON :
+TYPE_BOOL bool
+COMMA ,
+ID limite
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_BOOL bool
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID resultado
+COLON :
+TYPE_BOOL bool
+NEWLINE \n
+ID resultado
+OP_ASSIGN =
+ID ativo
+OP_LESS_THAN <
+ID limite
+NEWLINE \n
+KW_RETURN return
+ID resultado
+NEWLINE \n
+DEDENT  
+$ $

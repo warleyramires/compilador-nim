@@ -1,0 +1,2 @@
+proc verdadeiro(): bool =
+  return true

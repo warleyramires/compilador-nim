@@ -1,0 +1,4 @@
+proc inverte(b: bool): bool =
+  var resultado: bool
+  resultado = not b
+  return resultado

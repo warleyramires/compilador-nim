@@ -1,0 +1,6 @@
+proc escopo(a: int): int =
+  var x: int = a
+  if x < 10:
+    var x: int = 100
+    x = x + 1
+  return x

@@ -1,0 +1,5 @@
+proc principal(x: int): int =
+  return soma(x)
+
+proc soma(a: int, b: int): int =
+  return a + b

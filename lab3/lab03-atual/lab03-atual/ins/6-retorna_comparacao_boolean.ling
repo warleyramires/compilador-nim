@@ -1,0 +1,4 @@
+proc menor(a: int, b: int): bool =
+  var resultado: bool
+  resultado = a < b
+  return resultado

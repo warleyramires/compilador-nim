@@ -1,0 +1,4 @@
+proc erroIgualdadeTiposMistos(x: int, b: bool): bool =
+  var resultado: bool
+  resultado = x == b
+  return resultado

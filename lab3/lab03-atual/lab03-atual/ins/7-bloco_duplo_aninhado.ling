@@ -1,0 +1,10 @@
+proc calcular(): int =
+  var a: int
+  a = 5
+  if true:
+    var b: int
+    b = a * 3
+    if true:
+      var c: int
+      c = b + 1
+      return c

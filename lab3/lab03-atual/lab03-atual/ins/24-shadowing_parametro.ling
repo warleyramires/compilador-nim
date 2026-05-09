@@ -1,0 +1,9 @@
+proc sombraParametro(x: int): int =
+  var acum: int
+  acum = x * 2
+  if true:
+    var x: int
+    x = acum + 9
+    var resultado: int
+    resultado = x * x
+    return resultado

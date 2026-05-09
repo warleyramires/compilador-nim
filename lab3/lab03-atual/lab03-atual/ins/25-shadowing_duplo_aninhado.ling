@@ -1,0 +1,12 @@
+proc sombraDupla(a: int, b: int): int =
+  var v: int
+  v = a * 10
+  var w: int
+  w = b + 1
+  if true:
+    var v: int
+    v = w * 2
+    if true:
+      var w: int
+      w = v + v
+      return w

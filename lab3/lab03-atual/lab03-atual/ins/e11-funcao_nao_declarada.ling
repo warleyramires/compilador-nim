@@ -1,0 +1,2 @@
+proc principal(x: int): int =
+  return desconhecida(x)

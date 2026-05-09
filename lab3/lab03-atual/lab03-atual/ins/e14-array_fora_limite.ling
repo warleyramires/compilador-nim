@@ -1,0 +1,4 @@
+proc erroLimite(): int =
+  var valores: array[3, int]
+  valores[3] = 10
+  return valores[0]

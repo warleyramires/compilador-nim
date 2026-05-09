@@ -1,0 +1,28 @@
+KW_PROC proc
+ID erroRetornoFloat
+LEFT_PARENTHESIS (
+ID a
+COLON :
+TYPE_INT int
+RIGHT_PARENTHESIS )
+COLON :
+TYPE_INT int
+OP_ASSIGN =
+NEWLINE \n
+INDENT  
+KW_VAR var
+ID resultado
+COLON :
+TYPE_FLOAT float
+NEWLINE \n
+ID resultado
+OP_ASSIGN =
+ID a
+OP_MULTIPLICATION *
+NUM_FLOAT 1.5
+NEWLINE \n
+KW_RETURN return
+ID resultado
+NEWLINE \n
+DEDENT  
+$ $

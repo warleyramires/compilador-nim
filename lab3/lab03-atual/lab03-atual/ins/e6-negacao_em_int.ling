@@ -1,0 +1,4 @@
+proc erroNegacaoInt(x: int): bool =
+  var resultado: bool
+  resultado = not x
+  return resultado

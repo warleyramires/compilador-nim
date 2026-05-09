@@ -1,0 +1,2 @@
+proc erroRetorno(): int =
+  return 1.5

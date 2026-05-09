@@ -1,0 +1,2 @@
+proc erroOperador(): int =
+  return true + 1
